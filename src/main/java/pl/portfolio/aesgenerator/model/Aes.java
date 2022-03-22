@@ -8,7 +8,6 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
-@AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "aes")
 public class Aes {
@@ -20,4 +19,9 @@ public class Aes {
     private String key;
     private String encodeText;
 
+    public Aes(String text, String key, String encodeText) {
+        this.text = text;
+        this.key = key;
+        this.encodeText = encodeText;
+    }
 }

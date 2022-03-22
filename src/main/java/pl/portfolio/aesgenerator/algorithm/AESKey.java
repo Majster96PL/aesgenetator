@@ -1,4 +1,4 @@
-package pl.portfolio.aesgenerator.model.algorithm;
+package pl.portfolio.aesgenerator.algorithm;
 
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
