@@ -4,7 +4,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import pl.portfolio.aesgenerator.algorithm.AESAlgorithm;
 import pl.portfolio.aesgenerator.model.AesService;
-import pl.portfolio.aesgenerator.ui.TextMain;
 
 import java.util.Scanner;
 
@@ -29,6 +28,6 @@ public class AesGeneratorApplication {
 						aesService.encrypt(textToEncrypt, AESAlgorithm.SECRET_KEY, AESAlgorithm.encrypt(textToEncrypt))
 				);
 		System.out.println("Encrypting text: " + stringToEncrypt);
+		System.out.println(aesService.findById(scanner.nextLong()));
 	}
-
 }
