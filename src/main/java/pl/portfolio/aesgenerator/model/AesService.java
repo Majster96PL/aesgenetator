@@ -20,4 +20,12 @@ public class AesService{
         System.out.println(stringToEncrypt);
         return aesRepository.save(aes);
     }
+
+    public String decrypt(String decodeText){
+         return AESAlgorithm.decrypt(decodeText);
+    }
+
+    public Optional<Aes> findById(Long Id){
+        return aesRepository.findById(Id);
+    }
 }
