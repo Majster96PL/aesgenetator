@@ -9,6 +9,5 @@ import java.util.Optional;
 @Repository
 @Transactional(readOnly = true)
 public interface AesRepository extends JpaRepository<Aes, Long> {
-
     Optional<Aes> findById(Long Id);
 }
