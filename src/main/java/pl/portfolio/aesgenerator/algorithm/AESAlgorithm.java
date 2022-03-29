@@ -38,12 +38,12 @@ public class AESAlgorithm {
 
     public static String decrypt(String stringToDecrypt){
         try{
-            var ivParameterSpec = new IvParameterSpec(bytesIV);
+            IvParameterSpec ivParameterSpec = new IvParameterSpec(bytesIV);
             var secretKeyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
             var keySpec = new PBEKeySpec(SECRET_KEY.toCharArray(),SALT_KEY.getBytes(), 65536, 256);
-            var secretKey=secretKeyFactory.generateSecret(keySpec);
+            var secretKey= secretKeyFactory.generateSecret(keySpec);
             var secretSpecKey = new SecretKeySpec(secretKey.getEncoded(), "AES");
-            var cipher = Cipher.getInstance("AES/CBC/PKC5Padding");
+            var cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
             cipher.init(Cipher.DECRYPT_MODE, secretSpecKey, ivParameterSpec);
             return new String(cipher.doFinal(Base64.getDecoder().decode(stringToDecrypt)));
         }catch(Exception e){

@@ -3,6 +3,7 @@ package pl.portfolio.aesgenerator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import pl.portfolio.aesgenerator.algorithm.AESAlgorithm;
+import pl.portfolio.aesgenerator.json.JSONDocument;
 import pl.portfolio.aesgenerator.model.AesService;
 
 import java.util.Scanner;
@@ -11,9 +12,10 @@ import java.util.Scanner;
 public class AesGeneratorApplication {
 
 	private static AesService aesService;
+	private static JSONDocument jsonDocument;
 
 	public AesGeneratorApplication(AesService aesService) {
-		AesGeneratorApplication.aesService= aesService;
+		AesGeneratorApplication.aesService = aesService;
 
 	}
 
@@ -27,7 +29,14 @@ public class AesGeneratorApplication {
 				String.valueOf(
 						aesService.encrypt(textToEncrypt, AESAlgorithm.SECRET_KEY, AESAlgorithm.encrypt(textToEncrypt))
 				);
-		System.out.println("Encrypting text: " + stringToEncrypt);
-		System.out.println(aesService.findById(scanner.nextLong()));
+		System.out.println();
+		System.out.println("Decrypting text?");
+		String answer = scanner.nextLine();
+		if(answer.equals("Tak") | answer.equals("TAK")){
+			String deccryptedString = AESAlgorithm.decrypt(stringToEncrypt);
+			System.out.println(deccryptedString);
+		}else{
+			scanner.close();
+		}
 	}
 }
