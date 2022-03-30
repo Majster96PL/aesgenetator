@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 
 public class TextGUI {
-    
+
     public TextGUI(AesService aesService) {
         System.out.println("AES Generator - Cipher generator");
         System.out.println("Enter text to encrypting: ");
@@ -21,8 +21,8 @@ public class TextGUI {
         System.out.println("Decrypting text?");
         String answer = scanner.nextLine();
         if(answer.equals("Tak") | answer.equals("TAK")){
-            String deccryptedString = AESAlgorithm.decrypt(stringToEncrypt);
-            System.out.println(deccryptedString);
+            String decryptedString = aesService.decrypt(AESAlgorithm.encrypt(textToEncrypt));
+            System.out.println("Decrypted Text: " + decryptedString);
             //JSONDocument.getJSON();
         }else{
             scanner.close();
