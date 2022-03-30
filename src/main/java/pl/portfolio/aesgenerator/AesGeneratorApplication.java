@@ -16,8 +16,9 @@ public class AesGeneratorApplication {
 
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		SpringApplication.run(AesGeneratorApplication.class, args);
 		new TextGUI(aesService);
+
 	}
 }

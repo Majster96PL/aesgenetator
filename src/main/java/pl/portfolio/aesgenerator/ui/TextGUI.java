@@ -1,6 +1,7 @@
 package pl.portfolio.aesgenerator.ui;
 
 import pl.portfolio.aesgenerator.algorithm.AESAlgorithm;
+import pl.portfolio.aesgenerator.json.JSONDocument;
 import pl.portfolio.aesgenerator.model.AesService;
 
 import java.util.Scanner;
@@ -8,7 +9,7 @@ import java.util.Scanner;
 
 public class TextGUI {
 
-    public TextGUI(AesService aesService) {
+    public TextGUI(AesService aesService) throws Exception {
         System.out.println("AES Generator - Cipher generator");
         System.out.println("Enter text to encrypting: ");
         var scanner = new Scanner(System.in);
@@ -23,7 +24,7 @@ public class TextGUI {
         if(answer.equals("Tak") | answer.equals("TAK")){
             String decryptedString = aesService.decrypt(AESAlgorithm.encrypt(textToEncrypt));
             System.out.println("Decrypted Text: " + decryptedString);
-            //JSONDocument.getJSON();
+            JSONDocument.getJSON();
         }else{
             scanner.close();
         }
