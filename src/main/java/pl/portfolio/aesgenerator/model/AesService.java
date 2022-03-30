@@ -3,10 +3,6 @@ package pl.portfolio.aesgenerator.model;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.portfolio.aesgenerator.algorithm.AESAlgorithm;
-import pl.portfolio.aesgenerator.json.JSONDocument;
-
-import java.util.Optional;
-import java.util.Scanner;
 
 @Service
 @AllArgsConstructor
@@ -23,6 +19,6 @@ public class AesService{
     }
 
     public String decrypt(String decodeText){
-         return AESAlgorithm.decrypt(decodeText);
+        return AESAlgorithm.decrypt(decodeText);
     }
 }
