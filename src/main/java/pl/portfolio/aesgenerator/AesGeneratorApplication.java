@@ -2,12 +2,9 @@ package pl.portfolio.aesgenerator;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import pl.portfolio.aesgenerator.algorithm.AESAlgorithm;
-import pl.portfolio.aesgenerator.json.JSONDocument;
 import pl.portfolio.aesgenerator.model.AesService;
 import pl.portfolio.aesgenerator.ui.TextGUI;
 
-import java.util.Scanner;
 
 @SpringBootApplication
 public class AesGeneratorApplication {
@@ -19,7 +16,7 @@ public class AesGeneratorApplication {
 
 	}
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) {
 		SpringApplication.run(AesGeneratorApplication.class, args);
 		new TextGUI(aesService);
 	}
