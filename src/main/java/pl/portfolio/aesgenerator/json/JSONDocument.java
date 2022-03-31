@@ -2,49 +2,50 @@ package pl.portfolio.aesgenerator.json;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class JSONDocument {
 
-    public static ResultSet  RetrieveData() throws Exception{
-        DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+    private static final Logger log = LoggerFactory.getLogger(JSONDocument.class);
+
+    public  void getJSONFile(){
         String url = "jdbc:mysql://localhost:3306/aes";
-        var connection = DriverManager.getConnection(url, "root ", "root");
-        System.out.println("Connection...");
-        var statement = connection.createStatement();
-        return statement.executeQuery("Select * from aes");
-    }
-
-    public static void getJSON() throws Exception {
-        var jsonObject = new JSONObject();
-        var jsonArray = new JSONArray();
-        var resultSet = RetrieveData();
-        while(resultSet.next()){
-            Map<String, String> jsonMap = new HashMap<>();
-            jsonMap.put("ID", String.valueOf(resultSet.getInt("id")));
-            jsonMap.put("Text", resultSet.getString("text"));
-            jsonMap.put("Key", resultSet.getString("key"));
-            jsonMap.put("Encode_Text", resultSet.getString("encode_text"));
-            var recordJSONObject = new JSONObject(jsonMap);
-            jsonArray.add(recordJSONObject);
-        }
-        jsonObject.put("AES", jsonArray);
+        String username = "root";
+        String password = "root";
         try{
-            var fileWriter = new FileWriter("output.json");
-            fileWriter.write(jsonObject.toJSONString());
-            fileWriter.close();
-        }catch (IOException e){
-            e.printStackTrace();
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            var connection = DriverManager.getConnection(url,username,password);
+            System.out.println("Działa czy nie?");
+            var statement = connection.createStatement();
+            var resultSet = statement.executeQuery("select * from aes");
+            var jsonObject = new JSONObject();
+            var jsonArray = new JSONArray();
+            while(resultSet.next()){
+                var record = new JSONObject();
+                record.put("ID", resultSet.getInt("id"));
+                record.put("TEXT", resultSet.getString("text"));
+                record.put("KEY", resultSet.getString("key"));
+                record.put("ENCODE_TEXT", resultSet.getString("encode_text").trim());
+                jsonArray.add(record);
+            }
+            jsonObject.put("AES_DATA", jsonArray);
+            try{
+                FileWriter fileWriter = new FileWriter("output.json");
+                fileWriter.write(jsonObject.toJSONString());
+                fileWriter.close();
+            }catch (IOException e){
+                log.error(String.valueOf(e));
+            }
+            resultSet.close();
+            statement.close();
+            connection.close();
+        }catch (Exception e){
+            log.error(String.valueOf(e));
         }
-        System.out.println("JSON file created..");
+        System.out.println("JSON file created");
     }
-
 }

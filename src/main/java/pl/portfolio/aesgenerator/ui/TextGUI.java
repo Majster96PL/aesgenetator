@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class TextGUI {
 
-    public TextGUI(AesService aesService) throws Exception {
+    public TextGUI(AesService aesService, JSONDocument jsonDocument){
         System.out.println("AES Generator - Cipher generator");
         System.out.println("Enter text to encrypting: ");
         var scanner = new Scanner(System.in);
@@ -24,7 +24,7 @@ public class TextGUI {
         if(answer.equals("Tak") | answer.equals("TAK")){
             String decryptedString = aesService.decrypt(AESAlgorithm.encrypt(textToEncrypt));
             System.out.println("Decrypted Text: " + decryptedString);
-            JSONDocument.getJSON();
+            jsonDocument.getJSONFile();
         }else{
             scanner.close();
         }
