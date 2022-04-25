@@ -11,17 +11,14 @@ import pl.portfolio.aesgenerator.ui.TextGUI;
 public class AesGeneratorApplication {
 
 	private static AesService aesService;
-	private static JSONDocument jsonDocument;
 
-	public AesGeneratorApplication(AesService aesService, JSONDocument jsonDocument) {
+	public AesGeneratorApplication(AesService aesService) {
 		AesGeneratorApplication.aesService = aesService;
-		AesGeneratorApplication.jsonDocument = jsonDocument;
 
 	}
 
 	public static void main(String[] args)  {
 		SpringApplication.run(AesGeneratorApplication.class, args);
-		new TextGUI(aesService, jsonDocument );
-
+		new TextGUI(aesService);
 	}
 }
