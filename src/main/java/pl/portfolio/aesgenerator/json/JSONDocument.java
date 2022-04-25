@@ -12,14 +12,13 @@ public class JSONDocument {
 
     private static final Logger log = LoggerFactory.getLogger(JSONDocument.class);
 
-    public  void getJSONFile(){
+    public static void getJSONFile(){
         String url = "jdbc:mysql://localhost:3306/aes";
         String username = "root";
         String password = "root";
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             var connection = DriverManager.getConnection(url,username,password);
-            System.out.println("Działa czy nie?");
             var statement = connection.createStatement();
             var resultSet = statement.executeQuery("select * from aes");
             var jsonObject = new JSONObject();
@@ -46,6 +45,6 @@ public class JSONDocument {
         }catch (Exception e){
             log.error(String.valueOf(e));
         }
-        System.out.println("JSON file created");
+        System.out.println("JSON file created.");
     }
 }
